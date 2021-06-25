@@ -1,0 +1,93 @@
+load-plugin CS5099Game
+
+#Productions which allow for transfer of information to/from IO system
+
+sp {game*elaborate*state*tile
+    (state <s> ^name game
+               ^io.input-link.tile <x>)
+-->
+    (<s> ^tile <x>)}
+
+sp {game*elaborate*state*unit
+    (state <s> ^name game
+               ^io.input-link.unit <x>)
+-->
+    (<s> ^unit <x>)}
+
+#Template actions; best to produce individual ones for each action
+sp {game*monitor*operator-execution*tile-action
+   (state <s> ^operator <o>)
+   (<o> ^name tile-action
+         ^entity <self>
+         ^code <val>
+         ^x <propX>
+         ^y <propY>)
+-->
+   (<out> ^agentCommand
+          ^invokingEntity <self> ^actionType <val> ^targetX <propX> ^targetY <propY>)
+          (interrupt)}
+
+sp {game*monitor*operator-execution*move
+   (state <s> ^operator <o>)
+   (<o> ^name move
+         ^entity <self>
+         ^x <propX>
+         ^y <propY>)
+-->
+   (<out> ^agentCommand
+          ^invokingEntity <self> ^actionType 0 ^targetX <propX> ^targetY <propY>)
+          (interrupt)}
+
+sp {game*monitor*operator-execution*unit-action
+   (state <s> ^operator <o>)
+   (<o> ^name unit-action
+         ^unit <self>
+         ^code <val>
+         ^unit <propTarget>)
+-->
+   (write (crlf)
+          | invokingEntity | <self>
+          | actionType | <val>
+          | targetEntity | <propTarget>)
+   (interrupt)}
+
+#Needs proper initialise production?
+
+sp {game*propose*move*legal
+    "The unit is capable of moving, and this space represents a valid move for it."
+    (state <s> ^name game)
+    (<i> ^entity 1
+         ^isSelf 1
+         ^canMove 1
+         ^moveSpeed <speed>
+         ^x <selfX>
+         ^y <selfY>)
+    (<t> ^tile 1
+         ^x <xCoord>
+         ^y <yCoord>
+         ^occupied 0)
+    #Test for movement range here; based on diagonal distance as a place holder. Better/alternative method may be required. Consider if A* can realistically be invoked here?
+    #Softlock potential if it cannot, or some way of memorising invalid moves not given
+    (<< abs <<xCoord> - <selfX>> abs abs <<yCoord> - <selfY>> >> <= speed)
+-->
+    (<s> ^operator <o>)
+    (<o> ^name move
+         ^entity <i>
+         ^x <xCoord>
+         ^y <yCoord>)}
+
+sp {game*propose*move*comparison
+    "One of these legal moves is preferable to the other (in this test case, because it is closer to the bottom right)"
+    (state <s> ^name game)_
+    (<o1> ^operator 1
+    ^name move
+    ^x <x1>
+    ^y <y1>)
+    (<o2> ^operator 1
+    ^name move
+    ^x <x2>
+    ^y <y2>)
+    (x1 > x2)
+    (y1 > y2)
+-->
+    (<o1> > <o2>)}

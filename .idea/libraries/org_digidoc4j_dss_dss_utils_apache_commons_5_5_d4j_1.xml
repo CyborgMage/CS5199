@@ -1,0 +1,22 @@
+<component name="libraryTable">
+  <library name="org.digidoc4j.dss:dss-utils-apache-commons:5.5.d4j.1" type="repository">
+    <properties maven-id="org.digidoc4j.dss:dss-utils-apache-commons:5.5.d4j.1" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/dss-utils-apache-commons-5.5.d4j.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/dss-utils-5.5.d4j.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-lang3-3.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-collections4-4.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-codec-1.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-io-2.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/dss-utils-apache-commons-5.5.d4j.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/dss-utils-5.5.d4j.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-lang3-3.9-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-collections4-4.4-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-codec-1.12-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-io-2.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
